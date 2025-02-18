@@ -35,7 +35,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     lateinit var newsViewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
-    //lateinit var retryButton: Button
     lateinit var errorText: TextView
     lateinit var itemSearchError: CardView
     lateinit var binding: FragmentSearchBinding
@@ -74,7 +73,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
             }
         }
-        newsViewModel.headlines.observe(viewLifecycleOwner, Observer { response ->
+        newsViewModel.searchNews.observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is Resource.Success<*> ->{
                     hideProgressBar()
@@ -102,13 +101,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
         })
 
-        //retryButton.setOnClickListener{
-        //    if(binding.searchEdit.text.toString().isNotEmpty()){
-        //        newsViewModel.searchNews(binding.searchEdit.text.toString())
-        //    }else{
-        //        hideErrorMessage()
-        //    }
-       // }
+
+
     }
 
 

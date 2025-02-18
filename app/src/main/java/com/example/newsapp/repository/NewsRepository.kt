@@ -3,7 +3,6 @@ package com.example.newsapp.repository
 import com.example.newsapp.api.RetrofitInstance
 import com.example.newsapp.db.ArticleDatabase
 import com.example.newsapp.models.Article
-import retrofit2.http.Query
 import java.util.Locale.IsoCountryCode
 
 class NewsRepository(val db : ArticleDatabase) {
