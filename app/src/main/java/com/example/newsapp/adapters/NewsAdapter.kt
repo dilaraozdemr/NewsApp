@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.newsapp.R
 import com.example.newsapp.models.Article
+import com.example.newsapp.ui.extensions.format
+import com.example.newsapp.ui.extensions.toLocalDateTime
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
@@ -58,11 +61,16 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
 
         holder.itemView.apply {
-            Glide.with(this).load(article.urlToImage).into(articleImage)
+            Glide.with(this)
+                .load(article.urlToImage)
+                .transform(RoundedCorners(20))
+                .into(articleImage)
 
             articleTitle.text = article.title
+            articleSource.text = article.author
             articleDescription.text = article.description
-            articleDateTime.text = article.publishedAt
+            val formattedDate = article.publishedAt.toLocalDateTime()?.format("dd/MM/yyyy HH:mm") ?: "Geçersiz tarih"
+            articleDateTime.text = formattedDate
 
             setOnClickListener{
                 onItemClickListener?.let {
